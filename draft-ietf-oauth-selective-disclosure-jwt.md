@@ -831,8 +831,13 @@ The holder SHOULD verify the binding between SD-JWT and II-Disclosures Object by
 
 ## Verification by the Verifier when Receiving SD-JWT and Holder-Selected Disclosures JWT
 
-Verifiers MUST follow [@RFC8725] for checking the SD-JWT and, if signed, the
-HS-Disclosures JWT.
+Verifiers MUST follow [@RFC8725] for validating the SD-JWT and, if signed, the
+HS-Disclosures JWT. 
+
+Whether to check the signature of the HS-Disclosures JWT is up to the Verifier's policy,
+based on the set of trust requirements such as trust frameworks it belongs to. 
+The Verifier MUST NOT accept HS-Disclosures JWTs using "none" algorithm, when the
+Verifier's policy requires a signed HS-Disclosures JWT. 
 
 Verifiers MUST go through (at least) the following steps before
 trusting/using any of the contents of an SD-JWT:
@@ -1998,6 +2003,7 @@ The verifier would decode the HS-Disclosures JWT and SD-JWT as follows:
    * updated examples
    * text clarifications
    * fix `cnf` structure in examples
+   * clarified that "alg=none" is allowed because when to check the signature is up to the Verifier's trust framework/policy, etc.) 
 
    -00
 
